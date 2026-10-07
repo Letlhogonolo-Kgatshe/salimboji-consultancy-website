@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a consultation | Salimboji Consultancy</title>
+    <meta name="description" content="Book an online doctor consultation in under two minutes: choose a service, pick a time, and confirm via WhatsApp or email.">
+    <meta name="theme-color" content="#1a2e5e">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/theme.js"></script>
+    <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+    <main id="main">
+        <section class="page-head">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-navy-900">Book a consultation</h1>
+                <p class="mt-2 text-slate-600">Three quick steps. We'll confirm your appointment on WhatsApp or email.</p>
+                <ol class="mt-6 grid grid-cols-3 gap-2 text-xs sm:text-sm font-semibold" id="steps" aria-label="Booking progress">
+                    <li data-step="1" class="step"><span class="block h-1.5 rounded-full bg-navy-800"></span><span class="mt-2 block text-navy-900">1. Service</span></li>
+                    <li data-step="2" class="step"><span class="block h-1.5 rounded-full bg-slate-200"></span><span class="mt-2 block text-slate-400">2. Date & time</span></li>
+                    <li data-step="3" class="step"><span class="block h-1.5 rounded-full bg-slate-200"></span><span class="mt-2 block text-slate-400">3. Your details</span></li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="pb-16">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6">
+                <form id="booking" class="card p-5 sm:p-8" novalidate>
+                    <!-- Step 1 -->
+                    <fieldset data-panel="1">
+                        <legend class="text-lg font-bold text-navy-900">What do you need?</legend>
+                        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" id="services"></div>
+                        <p class="mt-6 font-semibold text-navy-900">How would you like to meet?</p>
+                        <div class="mt-3 grid grid-cols-2 gap-3" id="channels">
+                            <button type="button" class="option" data-channel="WhatsApp video call" aria-pressed="true"><span class="text-xl" aria-hidden="true">💬</span><span class="block font-semibold mt-1">WhatsApp video</span><span class="block text-xs text-slate-500">Easiest on a phone</span></button>
+                            <button type="button" class="option" data-channel="Zoom meeting" aria-pressed="false"><span class="text-xl" aria-hidden="true">🎥</span><span class="block font-semibold mt-1">Zoom</span><span class="block text-xs text-slate-500">Best on a computer</span></button>
+                        </div>
+                    </fieldset>
+
+                    <!-- Step 2 -->
+                    <fieldset data-panel="2" class="hidden">
+                        <legend class="text-lg font-bold text-navy-900">Choose a day and time</legend>
+                        <div class="mt-4 flex gap-2 overflow-x-auto pb-2" id="days" role="group" aria-label="Day"></div>
+                        <div class="mt-4 grid grid-cols-3 sm:grid-cols-4 gap-2" id="slots" role="group" aria-label="Time"></div>
+                        <p class="mt-3 text-xs text-slate-500">Times are South African time (SAST). We'll confirm the exact time with you.</p>
+                    </fieldset>
+
+                    <!-- Step 3 -->
+                    <fieldset data-panel="3" class="hidden">
+                        <legend class="text-lg font-bold text-navy-900">Your details</legend>
+                        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <label class="sm:col-span-2"><span class="label">Full name</span><input id="b-name" class="field" autocomplete="name" required></label>
+                            <label><span class="label">Mobile number</span><input id="b-phone" class="field" type="tel" autocomplete="tel" inputmode="tel" placeholder="e.g. 082 123 4567" required></label>
+                            <label><span class="label">Email (optional)</span><input id="b-email" class="field" type="email" autocomplete="email"></label>
+                            <label class="sm:col-span-2"><span class="label">Briefly, what would you like help with? (optional)</span>
+                                <textarea id="b-reason" class="field" rows="3" maxlength="300" placeholder="e.g. Flu symptoms for 3 days"></textarea>
+                                <span class="block mt-1 text-xs text-slate-500">Keep it short. Your doctor will ask for details privately during the consultation.</span></label>
+                            <label class="sm:col-span-2 flex items-start gap-2 text-sm text-slate-600"><input id="b-consent" type="checkbox" class="mt-1 accent-navy-800" required>
+                                <span>I consent to Salimboji Consultancy using these details to arrange my consultation (POPIA).</span></label>
+                        </div>
+                    </fieldset>
+
+                    <!-- Review -->
+                    <div data-panel="4" class="hidden">
+                        <h2 class="text-lg font-bold text-navy-900">Check your booking</h2>
+                        <dl class="mt-4 divide-y divide-slate-100 text-sm" id="summary"></dl>
+                        <p class="mt-4 text-sm text-slate-600">Send your request and we'll confirm the appointment. Nothing is booked until we confirm.</p>
+                        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3" id="send"></div>
+                    </div>
+
+                    <!-- Done -->
+                    <div data-panel="5" class="hidden text-center py-4">
+                        <p class="text-5xl" aria-hidden="true">✅</p>
+                        <h2 class="mt-3 text-2xl font-extrabold text-navy-900">Request ready to send</h2>
+                        <p class="mt-2 text-slate-600 max-w-md mx-auto">Your message has opened in <span id="done-via"></span>. Press send there, and we'll reply to confirm your appointment.</p>
+                        <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+                            <button type="button" id="ics" class="btn-light">📅 Add to calendar</button>
+                            <a href="index.html" class="btn-primary">Back to home</a>
+                        </div>
+                    </div>
+
+                    <p id="err" class="mt-4 hidden text-sm rounded-xl bg-rose-50 text-rose-700 px-4 py-3" role="alert"></p>
+
+                    <div class="mt-8 flex justify-between gap-3" id="nav">
+                        <button type="button" id="back" class="btn-light invisible">← Back</button>
+                        <button type="button" id="next" class="btn-primary">Continue →</button>
+                    </div>
+                </form>
+                <p class="mt-4 text-center text-sm text-slate-500">Emergency? Call <strong>10177</strong> or <strong>112</strong> now.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/config.js"></script>
+    <script src="assets/site.js"></script>
+    <script>
+    (function () {
+        const { $, $$, esc, hasWa, saNow } = window.SC;
+        const C = window.CLINIC;
+        const SERVICES = [
+            ['consult', '🩺', 'General consultation', 'New symptoms or a health concern'],
+            ['followup', '🔁', 'Follow-up', 'Check-in after a previous visit'],
+            ['chronic', '💙', 'Chronic condition review', 'e.g. blood pressure, diabetes, asthma'],
+            ['monitoring', '📈', 'Health monitoring', 'Ongoing care plan check-in'],
+            ['script', '💊', 'Repeat prescription review', 'Where clinically appropriate'],
+            ['prevent', '🛡️', 'Preventive care & advice', 'Lifestyle, travel and wellness advice'],
+        ];
+        const st = { step: 1, service: new URLSearchParams(location.search).get('service') || 'consult', channel: 'WhatsApp video call', day: null, time: null };
+
+        $('#services').innerHTML = SERVICES.map(([id, ic, t, d]) => `<button type="button" class="option" data-service="${id}" aria-pressed="${id === st.service}"><span class="text-xl" aria-hidden="true">${ic}</span><span class="block font-semibold mt-1 text-navy-900">${t}</span><span class="block text-xs text-slate-500">${d}</span></button>`).join('');
+        $('#services').addEventListener('click', (e) => { const b = e.target.closest('[data-service]'); if (!b) return; st.service = b.dataset.service; $$('[data-service]').forEach((x) => x.setAttribute('aria-pressed', x === b)); });
+        $('#channels').addEventListener('click', (e) => { const b = e.target.closest('[data-channel]'); if (!b) return; st.channel = b.dataset.channel; $$('[data-channel]').forEach((x) => x.setAttribute('aria-pressed', x === b)); });
+
+        // Next 14 days with opening hours; slots in the past (SAST) are disabled.
+        const now = saNow();
+        const days = [];
+        for (let i = 0; days.length < 10 && i < 21; i++) {
+            const d = new Date(now); d.setDate(now.getDate() + i);
+            const h = C.open[d.getDay()]; if (!h) continue;
+            const slots = C.slots.filter((s) => +s.slice(0, 2) >= h[0] && +s.slice(0, 2) < h[1]).map((s) => ({ s, past: i === 0 && (+s.slice(0, 2) + +s.slice(3) / 60) <= now.getHours() + now.getMinutes() / 60 + 0.5 }));
+            if (slots.some((x) => !x.past)) days.push({ d, slots, label: i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : d.toLocaleDateString('en-ZA', { weekday: 'short' }) });
+        }
+        function renderDays() {
+            $('#days').innerHTML = days.map((x, i) => `<button type="button" class="slot !px-3 shrink-0 min-w-[4.5rem]" data-day="${i}" aria-pressed="${st.day === i}"><span class="block text-xs font-medium opacity-80">${x.label}</span>${x.d.getDate()} ${x.d.toLocaleDateString('en-ZA', { month: 'short' })}</button>`).join('');
+            const sel = days[st.day];
+            $('#slots').innerHTML = sel ? sel.slots.map(({ s, past }) => `<button type="button" class="slot" data-time="${s}" ${past ? 'disabled aria-disabled="true"' : ''} aria-pressed="${st.time === s}">${s}</button>`).join('') : '<p class="col-span-full text-sm text-slate-500">Choose a day to see available times.</p>';
+        }
+        $('#days').addEventListener('click', (e) => { const b = e.target.closest('[data-day]'); if (!b) return; st.day = +b.dataset.day; st.time = null; renderDays(); });
+        $('#slots').addEventListener('click', (e) => { const b = e.target.closest('[data-time]'); if (!b || b.disabled) return; st.time = b.dataset.time; renderDays(); });
+        st.day = 0; renderDays();
+
+        const svc = () => SERVICES.find((s) => s[0] === st.service);
+        const when = () => `${days[st.day].d.toLocaleDateString('en-ZA', { weekday: 'long', day: 'numeric', month: 'long' })} at ${st.time}`;
+        function error(msg) { const e = $('#err'); e.textContent = msg; e.classList.toggle('hidden', !msg); }
+        function validate() {
+            if (st.step === 2 && !st.time) return 'Please choose a time slot.';
+            if (st.step === 3) {
+                const name = $('#b-name').value.trim(), phone = $('#b-phone').value.replace(/[^\d+]/g, '');
+                $('#b-name').classList.toggle('invalid', name.length < 2);
+                $('#b-phone').classList.toggle('invalid', phone.length < 9);
+                if (name.length < 2) return 'Please enter your full name.';
+                if (phone.length < 9) return 'Please enter a valid mobile number so we can confirm your booking.';
+                if ($('#b-email').value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('#b-email').value)) return 'Please check your email address.';
+                if (!$('#b-consent').checked) return 'Please tick the consent box so we can use your details to arrange the consultation.';
+            }
+            return '';
+        }
+        function message() {
+            return [`Hi Salimboji, I'd like to book a consultation.`, '',
+                `Service: ${svc()[2]}`, `When: ${when()} (SAST)`, `How: ${st.channel}`,
+                `Name: ${$('#b-name').value.trim()}`, `Mobile: ${$('#b-phone').value.trim()}`,
+                $('#b-email').value ? `Email: ${$('#b-email').value.trim()}` : '', $('#b-reason').value.trim() ? `Reason: ${$('#b-reason').value.trim()}` : ''].filter((l, i) => l || i === 1).join('\n');
+        }
+        function go(step) {
+            st.step = step;
+            $$('[data-panel]').forEach((p) => p.classList.toggle('hidden', +p.dataset.panel !== step));
+            $$('#steps .step').forEach((li) => {
+                const n = +li.dataset.step, on = n <= Math.min(step, 3);
+                li.firstElementChild.className = 'block h-1.5 rounded-full ' + (on ? 'bg-navy-800' : 'bg-slate-200');
+                li.lastElementChild.className = 'mt-2 block ' + (on ? 'text-navy-900' : 'text-slate-400');
+            });
+            $('#back').classList.toggle('invisible', step === 1 || step === 5);
+            $('#next').classList.toggle('hidden', step >= 4);
+            $('#nav').classList.toggle('hidden', step === 5);
+            $('#next').textContent = step === 3 ? 'Review booking →' : 'Continue →';
+            if (step === 4) {
+                const rows = [['Service', svc()[2]], ['When', `${when()} (SAST)`], ['How', st.channel], ['Name', $('#b-name').value.trim()], ['Mobile', $('#b-phone').value.trim()]];
+                if ($('#b-email').value) rows.push(['Email', $('#b-email').value.trim()]);
+                if ($('#b-reason').value.trim()) rows.push(['Reason', $('#b-reason').value.trim()]);
+                $('#summary').innerHTML = rows.map(([k, v]) => `<div class="py-2.5 flex justify-between gap-4"><dt class="text-slate-500">${k}</dt><dd class="font-semibold text-navy-900 text-right">${esc(v)}</dd></div>`).join('');
+                const text = message();
+                $('#send').innerHTML = (hasWa ? `<a class="btn-primary" data-via="WhatsApp" target="_blank" rel="noopener" href="https://wa.me/${C.whatsapp}?text=${encodeURIComponent(text)}">💬 Send on WhatsApp</a>` : '')
+                    + `<a class="${hasWa ? 'btn-light' : 'btn-primary'}" data-via="your email app" href="mailto:${C.email}?subject=${encodeURIComponent('Consultation booking request')}&body=${encodeURIComponent(text)}">✉️ Send by email</a>`;
+            }
+            error('');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        $('#next').addEventListener('click', () => { const m = validate(); if (m) return error(m); go(st.step + 1); });
+        $('#back').addEventListener('click', () => go(Math.max(1, st.step - 1)));
+        $('#send').addEventListener('click', (e) => { const a = e.target.closest('[data-via]'); if (!a) return; $('#done-via').textContent = a.dataset.via; setTimeout(() => go(5), 300); });
+
+        // Calendar file for the requested slot (30 minutes, SAST = UTC+2).
+        $('#ics').addEventListener('click', () => {
+            const d = days[st.day].d, [h, m] = st.time.split(':').map(Number);
+            const start = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), h - 2, m));
+            const end = new Date(start.getTime() + 30 * 60000);
+            const f = (x) => x.toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+            const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Salimboji Consultancy//Booking//EN', 'BEGIN:VEVENT', `UID:${Date.now()}@salimboji`, `DTSTAMP:${f(new Date())}`,
+                `DTSTART:${f(start)}`, `DTEND:${f(end)}`, `SUMMARY:Salimboji consultation (${svc()[2]})`, `DESCRIPTION:${st.channel}. Requested, awaiting confirmation.`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+            a.download = 'salimboji-consultation.ics';
+            a.click();
+            setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        });
+        go(1);
+    })();
+    </script>
+</body>
+</html>

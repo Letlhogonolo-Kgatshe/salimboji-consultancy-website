@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & FAQ | Salimboji Consultancy</title>
+    <meta name="description" content="Contact Salimboji Consultancy by phone, WhatsApp or email, see our opening hours, and get answers to common questions about online consultations and medication delivery.">
+    <meta name="theme-color" content="#1a2e5e">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/theme.js"></script>
+    <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+    <main id="main">
+        <section class="page-head">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-navy-900">Contact us</h1>
+                <p class="mt-2 text-slate-600">Get in touch with our healthcare team. For bookings, the fastest way is to <a href="book.html" class="font-semibold text-navy-800 underline">book online</a>.</p>
+            </div>
+        </section>
+
+        <section class="pb-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                <div class="space-y-4">
+                    <div class="grid grid-cols-1 gap-3" id="channels"></div>
+                    <div class="card p-5"><h2 class="font-bold text-navy-900">Opening hours</h2><ul class="mt-3 space-y-1.5 text-sm" id="hours"></ul></div>
+                </div>
+                <form id="c-form" class="lg:col-span-2 card p-5 sm:p-8 grid grid-cols-1 sm:grid-cols-2 gap-4" novalidate>
+                    <h2 class="sm:col-span-2 text-lg font-bold text-navy-900">Send us a message</h2>
+                    <label><span class="label">Name</span><input id="c-name" class="field" autocomplete="name"></label>
+                    <label><span class="label">Email</span><input id="c-email" class="field" type="email" autocomplete="email"></label>
+                    <label class="sm:col-span-2"><span class="label">Subject</span><input id="c-subject" class="field"></label>
+                    <label class="sm:col-span-2"><span class="label">Message</span><textarea id="c-msg" class="field" rows="5"></textarea>
+                        <span class="block mt-1 text-xs text-slate-500">Please don't include detailed medical information here. Book a consultation instead.</span></label>
+                    <p id="c-status" class="sm:col-span-2 hidden text-sm rounded-xl px-4 py-3" role="status"></p>
+                    <div class="sm:col-span-2 flex justify-end"><button class="btn-primary" type="submit">Send message</button></div>
+                </form>
+            </div>
+        </section>
+
+        <section class="py-12 bg-slate-50" id="faq">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-navy-900 text-center">Frequently asked questions</h2>
+                <div class="mt-8 space-y-3" id="faq-list"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/config.js"></script>
+    <script src="assets/site.js"></script>
+    <script>
+    (function () {
+        const { $, esc, telHref, waHref, hasPhone, hasWa } = window.SC;
+        const C = window.CLINIC;
+        const ch = (href, icon, title, value, ext) => `<a href="${href}" ${ext ? 'target="_blank" rel="noopener"' : ''} class="card p-4 flex items-center gap-4 hover:shadow-md transition"><span class="w-11 h-11 rounded-xl bg-navy-50 grid place-items-center text-xl" aria-hidden="true">${icon}</span><span><span class="block text-xs text-slate-500">${title}</span><span class="block font-semibold text-navy-900 break-all">${esc(value)}</span></span></a>`;
+        $('#channels').innerHTML = ch(telHref, '📞', 'Call us', C.phoneDisplay) + (hasWa ? ch(waHref('Hi Salimboji'), '💬', 'WhatsApp', 'Chat with us', true) : '') + ch(`mailto:${C.email}`, '✉️', 'Email', C.email) + `<div class="card p-4 flex items-center gap-4"><span class="w-11 h-11 rounded-xl bg-navy-50 grid place-items-center text-xl" aria-hidden="true">📍</span><span><span class="block text-xs text-slate-500">Address</span><span class="block font-semibold text-navy-900">${esc(C.address)}</span></span></div>`;
+        $('#hours').innerHTML = C.hours.map(([d, h]) => `<li class="flex justify-between gap-4"><span class="text-slate-600">${esc(d)}</span><span class="font-semibold text-navy-900">${esc(h)}</span></li>`).join('');
+
+        const FAQ = [
+            ['How do online consultations work?', 'Book a time online, then meet your doctor on a WhatsApp video call or Zoom. They\'ll ask about your symptoms, advise you, and prescribe medication if it\'s appropriate.'],
+            ['What do I need for a video consultation?', 'A phone, tablet or computer with a camera and internet connection, WhatsApp or Zoom installed, and a quiet, private space.'],
+            ['Can the doctor prescribe medication online?', 'Yes, where it is clinically appropriate after your consultation. Some conditions need an in-person examination, and your doctor will tell you if so.'],
+            ['How does medication delivery work?', 'Send your order with a photo of your prescription. We confirm availability, cost and delivery time before anything is dispensed, then deliver to your door.'],
+            ['How much does a consultation cost, and do you accept medical aid?', 'Fees and payment options, including medical aid, are confirmed with you when we confirm your booking, before your consultation.'],
+            ['Is my information private?', 'Yes. Your personal and health information is confidential and handled in line with the Protection of Personal Information Act (POPIA).'],
+            ['What if it\'s an emergency?', 'Online consultations are not for emergencies. Call 10177 for an ambulance, or 112 from a cellphone, or go to your nearest emergency unit.'],
+        ];
+        $('#faq-list').innerHTML = FAQ.map(([q, a], i) => `
+            <details class="card px-5 py-4 group" ${i === 0 ? 'open' : ''}>
+                <summary class="flex items-center justify-between gap-4 cursor-pointer font-semibold text-navy-900">${q}<span class="shrink-0 w-7 h-7 rounded-full bg-navy-50 grid place-items-center transition group-open:rotate-45">+</span></summary>
+                <p class="mt-3 text-slate-600 text-sm leading-relaxed">${a}</p>
+            </details>`).join('');
+
+        $('#c-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const v = (id) => $('#' + id).value.trim();
+            const st = $('#c-status'); st.classList.remove('hidden');
+            if (v('c-name').length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('c-email')) || v('c-msg').length < 5) {
+                st.className = 'sm:col-span-2 text-sm rounded-xl px-4 py-3 bg-rose-50 text-rose-700';
+                st.textContent = 'Please add your name, a valid email and a short message.';
+                return;
+            }
+            location.href = `mailto:${C.email}?subject=${encodeURIComponent(v('c-subject') || 'Website enquiry')}&body=${encodeURIComponent(`${v('c-msg')}\n\nFrom: ${v('c-name')} <${v('c-email')}>`)}`;
+            st.className = 'sm:col-span-2 text-sm rounded-xl px-4 py-3 bg-emerald-50 text-emerald-800';
+            st.textContent = 'Your message opened in your email app. Press send there to reach us.';
+        });
+    })();
+    </script>
+</body>
+</html>

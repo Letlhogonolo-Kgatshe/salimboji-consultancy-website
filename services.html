@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Salimboji Consultancy</title>
+    <meta name="description" content="Online consultations, medication delivery, health monitoring, chronic disease management and preventive care, and what can and can't be treated online.">
+    <meta name="theme-color" content="#1a2e5e">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/theme.js"></script>
+    <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+    <main id="main">
+        <section class="page-head">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-navy-900">Our services</h1>
+                <p class="mt-2 text-slate-600 max-w-2xl">Comprehensive healthcare solutions tailored to your needs, delivered online with medication sent to your door.</p>
+            </div>
+        </section>
+
+        <section class="pb-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="svc"></div>
+        </section>
+
+        <section class="py-12 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="card p-6 md:p-8">
+                    <h2 class="text-xl font-extrabold text-navy-900">✅ Often suitable for an online consultation</h2>
+                    <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-700">
+                        <li>• Colds, flu and sinus symptoms</li><li>• Sore throat and mild fever</li><li>• Allergies and hay fever</li><li>• Skin rashes (with photos)</li>
+                        <li>• Urinary tract infection symptoms</li><li>• Chronic condition check-ins</li><li>• Repeat prescription reviews</li><li>• Test result discussions</li>
+                    </ul>
+                    <p class="mt-4 text-xs text-slate-500">Your doctor will tell you if you need to be seen in person.</p>
+                </div>
+                <div class="card p-6 md:p-8 !border-rose-200 bg-rose-50/60">
+                    <h2 class="text-xl font-extrabold text-rose-800">🚑 Not for online care: get emergency help</h2>
+                    <ul class="mt-4 space-y-2 text-sm text-rose-900">
+                        <li>• Chest pain, difficulty breathing or signs of stroke</li><li>• Severe bleeding, burns, head injuries or broken bones</li>
+                        <li>• Loss of consciousness, seizures or severe confusion</li><li>• Suicidal thoughts. Call the SADAG helpline on <strong>0800 567 567</strong></li>
+                    </ul>
+                    <p class="mt-4 text-sm text-rose-900">Call <strong>10177</strong> (ambulance) or <strong>112</strong> from a cellphone.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="rounded-3xl bg-navy-800 text-white p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div><h2 class="text-2xl md:text-3xl font-extrabold">Not sure which service you need?</h2><p class="mt-2 text-navy-100">Book a general consultation and your doctor will guide you.</p></div>
+                    <a href="book.html" class="shrink-0 inline-flex items-center justify-center rounded-xl bg-white text-navy-900 font-bold px-7 py-3.5 hover:bg-navy-50">Book a consultation</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/config.js"></script>
+    <script src="assets/site.js"></script>
+    <script>
+    (function () {
+        const SERVICES = [
+            ['🩺', 'Online consultations', 'Connect with our qualified doctors via WhatsApp or Zoom for convenient medical advice from the comfort of your home.', ['WhatsApp video or Zoom', 'No travel or waiting rooms', 'Prescriptions where appropriate'], 'book.html?service=consult', 'Book a consultation'],
+            ['💊', 'Medication delivery', 'Order your prescribed medications online and have them delivered directly to your doorstep with our efficient service.', ['Prescription and over-the-counter items', 'Cost confirmed before dispensing', 'Delivered to your door'], 'medication.html', 'Order medication'],
+            ['📈', 'Health monitoring', 'Regular follow-ups and continuous health monitoring to support your well-being and recovery, with personalised care plans.', ['Scheduled follow-ups', 'Personal care plan', 'Track your progress'], 'book.html?service=monitoring', 'Book a follow-up'],
+            ['💙', 'Chronic disease management', 'Ongoing support for long-term conditions such as high blood pressure, diabetes and asthma, so you stay well between visits.', ['Regular reviews', 'Medication adjustments', 'Repeat scripts delivered'], 'book.html?service=chronic', 'Book a review'],
+            ['🛡️', 'Preventive care', 'Practical advice to help you stay healthy, from lifestyle and nutrition to travel health and screening reminders.', ['Lifestyle & wellness advice', 'Travel health', 'Screening guidance'], 'book.html?service=prevent', 'Book advice'],
+            ['🔁', 'Follow-ups', 'Quick check-ins after a previous consultation to see how you are responding to treatment.', ['Review your recovery', 'Adjust treatment', 'Short appointments'], 'book.html?service=followup', 'Book a follow-up'],
+        ];
+        document.getElementById('svc').innerHTML = SERVICES.map(([ic, t, d, pts, href, cta]) => `
+            <article class="card p-6 flex flex-col">
+                <span class="text-3xl" aria-hidden="true">${ic}</span>
+                <h2 class="mt-3 text-lg font-bold text-navy-900">${t}</h2>
+                <p class="mt-2 text-sm text-slate-600">${d}</p>
+                <ul class="mt-4 space-y-1.5 text-sm text-slate-700 flex-1">${pts.map((p) => `<li class="flex gap-2"><span class="text-emerald-600">✓</span>${p}</li>`).join('')}</ul>
+                <a href="${href}" class="mt-5 btn-primary !py-2.5 text-sm">${cta}</a>
+            </article>`).join('');
+    })();
+    </script>
+</body>
+</html>

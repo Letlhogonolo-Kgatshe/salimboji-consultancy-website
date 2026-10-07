@@ -1,0 +1,24 @@
+/* Salimboji shared styles (used with Tailwind CDN) */
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', system-ui, sans-serif; color: #1e293b; background: #fff; -webkit-font-smoothing: antialiased; }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; background: #1a2e5e; color: #fff; font-weight: 600; border-radius: .8rem; padding: .75rem 1.3rem; transition: background .2s; }
+.btn-primary:hover { background: #111f42; }
+.btn-light { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; background: #fff; color: #1a2e5e; font-weight: 600; border-radius: .8rem; padding: .75rem 1.3rem; border: 1px solid #c0c8d6; transition: border-color .2s; }
+.btn-light:hover { border-color: #1a2e5e; }
+.card { background: #fff; border: 1px solid #e2e8f0; border-radius: 1.1rem; }
+.field { width: 100%; border: 1px solid #cbd5e1; border-radius: .7rem; padding: .7rem .9rem; outline: none; background: #fff; transition: border-color .15s, box-shadow .15s; }
+.field:focus { border-color: #4a5e8a; box-shadow: 0 0 0 3px #dde3f0; }
+.field.invalid { border-color: #dc2626; box-shadow: 0 0 0 3px #fee2e2; }
+.label { display: block; font-size: .85rem; font-weight: 500; color: #334155; margin-bottom: .35rem; }
+.option { border: 1.5px solid #e2e8f0; border-radius: .9rem; padding: .9rem 1rem; text-align: left; transition: border-color .15s, background .15s; cursor: pointer; background: #fff; }
+.option:hover { border-color: #4a5e8a; }
+.option[aria-pressed="true"] { border-color: #1a2e5e; background: #eef1f8; box-shadow: 0 0 0 1px #1a2e5e inset; }
+.slot { border: 1.5px solid #e2e8f0; border-radius: .7rem; padding: .55rem 0; font-weight: 600; font-size: .9rem; background: #fff; }
+.slot:hover:not(:disabled) { border-color: #4a5e8a; }
+.slot[aria-pressed="true"] { background: #1a2e5e; color: #fff; border-color: #1a2e5e; }
+.slot:disabled { color: #cbd5e1; background: #f8fafc; cursor: not-allowed; }
+.page-head { background: linear-gradient(180deg, #eef1f8, #fff); padding: 3rem 0 2rem; }
+@media (min-width: 768px) { .page-head { padding: 4rem 0 2.5rem; } }
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }

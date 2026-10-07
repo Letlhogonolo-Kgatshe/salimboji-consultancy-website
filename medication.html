@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order medication | Salimboji Consultancy</title>
+    <meta name="description" content="Order your prescribed medication for delivery to your door. Send your order and prescription via WhatsApp or email.">
+    <meta name="theme-color" content="#1a2e5e">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/theme.js"></script>
+    <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+    <main id="main">
+        <section class="page-head">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-navy-900">Order medication</h1>
+                <p class="mt-2 text-slate-600 max-w-2xl">Easy access to your prescribed medication, delivered to your door. A valid prescription is required for prescription-only medicines.</p>
+            </div>
+        </section>
+
+        <section class="pb-16">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 items-start">
+                <form id="order" class="card p-5 sm:p-8 grid grid-cols-1 sm:grid-cols-2 gap-4" novalidate>
+                    <label class="sm:col-span-2"><span class="label">Full name</span><input id="o-name" class="field" autocomplete="name" required></label>
+                    <label><span class="label">Mobile number</span><input id="o-phone" class="field" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 082 123 4567" required></label>
+                    <label><span class="label">Email (optional)</span><input id="o-email" class="field" type="email" autocomplete="email"></label>
+                    <label class="sm:col-span-2"><span class="label">Delivery address</span><textarea id="o-address" class="field" rows="2" autocomplete="street-address" required placeholder="Street, suburb, city, postal code"></textarea></label>
+                    <fieldset class="sm:col-span-2">
+                        <legend class="label">Do you have a prescription?</legend>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="rx">
+                            <button type="button" class="option text-sm" data-rx="I have a prescription (I'll send a photo)" aria-pressed="true">📄 Yes, I'll send a photo</button>
+                            <button type="button" class="option text-sm" data-rx="Prescribed during a Salimboji consultation" aria-pressed="false">🩺 From a Salimboji consult</button>
+                            <button type="button" class="option text-sm" data-rx="No prescription (over-the-counter items)" aria-pressed="false">🛒 Over-the-counter only</button>
+                        </div>
+                    </fieldset>
+                    <label class="sm:col-span-2"><span class="label">Medication (name, strength and quantity)</span><textarea id="o-meds" class="field" rows="3" required placeholder="e.g. Amlodipine 5mg × 30"></textarea></label>
+                    <label class="sm:col-span-2 flex items-start gap-2 text-sm text-slate-600"><input id="o-consent" type="checkbox" class="mt-1 accent-navy-800">
+                        <span>I consent to Salimboji Consultancy using these details to process and deliver my order (POPIA).</span></label>
+                    <p id="o-err" class="sm:col-span-2 hidden text-sm rounded-xl bg-rose-50 text-rose-700 px-4 py-3" role="alert"></p>
+                    <div class="sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-3" id="o-send">
+                        <button type="submit" class="btn-primary" data-via="whatsapp">💬 Send order on WhatsApp</button>
+                        <button type="submit" class="btn-light" data-via="email">✉️ Send order by email</button>
+                    </div>
+                    <p id="o-done" class="sm:col-span-2 hidden text-sm rounded-xl bg-emerald-50 text-emerald-800 px-4 py-3" role="status"></p>
+                </form>
+
+                <aside class="space-y-4">
+                    <div class="card p-5">
+                        <h2 class="font-bold text-navy-900">How it works</h2>
+                        <ol class="mt-3 space-y-3 text-sm text-slate-600 list-decimal list-inside">
+                            <li>Send your order using the form.</li>
+                            <li>Send a clear photo of your prescription in the same chat (WhatsApp) or as an attachment (email).</li>
+                            <li>We confirm availability, the cost and delivery time before anything is dispensed.</li>
+                            <li>Your medication is delivered to your door.</li>
+                        </ol>
+                    </div>
+                    <div class="card p-5 text-sm text-slate-600">
+                        <h2 class="font-bold text-navy-900">No prescription yet?</h2>
+                        <p class="mt-2">Book an online consultation. If medication is appropriate, your doctor can prescribe it, and you can order delivery straight away.</p>
+                        <a href="book.html?service=script" class="mt-3 inline-block font-semibold text-accent-500 hover:underline">Book a consultation →</a>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/config.js"></script>
+    <script src="assets/site.js"></script>
+    <script>
+    (function () {
+        const { $, $$, hasWa } = window.SC;
+        const C = window.CLINIC;
+        let rx = 'I have a prescription (I\'ll send a photo)';
+        if (!hasWa) { $('[data-via="whatsapp"]').remove(); $('[data-via="email"]').className = 'btn-primary'; }
+        $('#rx').addEventListener('click', (e) => { const b = e.target.closest('[data-rx]'); if (!b) return; rx = b.dataset.rx; $$('[data-rx]').forEach((x) => x.setAttribute('aria-pressed', x === b)); });
+        let via = 'whatsapp';
+        $('#o-send').addEventListener('click', (e) => { const b = e.target.closest('[data-via]'); if (b) via = b.dataset.via; });
+        $('#order').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const v = (id) => $('#' + id).value.trim();
+            const err = (m) => { $('#o-err').textContent = m; $('#o-err').classList.toggle('hidden', !m); };
+            [['o-name', v('o-name').length < 2], ['o-phone', v('o-phone').replace(/[^\d+]/g, '').length < 9], ['o-address', v('o-address').length < 8], ['o-meds', v('o-meds').length < 3]]
+                .forEach(([id, bad]) => $('#' + id).classList.toggle('invalid', bad));
+            if ($$('.field.invalid').length) return err('Please complete the highlighted fields.');
+            if (!$('#o-consent').checked) return err('Please tick the consent box so we can process your order.');
+            err('');
+            const text = ['Hi Salimboji, I\'d like to order medication for delivery.', '', `Name: ${v('o-name')}`, `Mobile: ${v('o-phone')}`, v('o-email') ? `Email: ${v('o-email')}` : '',
+                `Delivery address: ${v('o-address')}`, `Prescription: ${rx}`, `Medication: ${v('o-meds')}`].filter((l, i) => l || i === 1).join('\n');
+            if (via === 'whatsapp' && hasWa) window.open(`https://wa.me/${C.whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+            else location.href = `mailto:${C.email}?subject=${encodeURIComponent('Medication order')}&body=${encodeURIComponent(text)}`;
+            $('#o-done').textContent = via === 'whatsapp' && hasWa
+                ? 'Your order opened in WhatsApp. Press send, then send a photo of your prescription in the same chat.'
+                : 'Your order opened in your email app. Attach a photo of your prescription, then press send.';
+            $('#o-done').classList.remove('hidden');
+        });
+    })();
+    </script>
+</body>
+</html>
