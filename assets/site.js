@@ -36,6 +36,7 @@
                 ${PAGES.map(([h, l]) => `<a href="${h}" class="px-3 py-2 rounded-lg ${h === here ? 'text-navy-800 bg-navy-50 font-semibold' : 'text-slate-600 hover:text-navy-800 hover:bg-slate-50'}"${h === here ? ' aria-current="page"' : ''}>${l}</a>`).join('')}
             </nav>
             <div class="hidden lg:flex items-center gap-2">
+                <div class="hidden xl:block mr-1"><div data-style-switch></div></div>
                 <a href="${telHref}" class="px-3 py-2 rounded-lg text-sm font-semibold text-navy-800 hover:bg-navy-50 inline-flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> ${hasPhone ? esc(C.phoneDisplay) : 'Call us'}</a>
                 <a href="book.html" class="btn-primary !py-2.5 text-sm">Book now</a>
             </div>
@@ -45,6 +46,7 @@
         </div>
         <nav id="mobile-menu" class="lg:hidden hidden border-t border-slate-200 bg-white" aria-label="Mobile">
             <div class="px-4 py-3 grid gap-1">${PAGES.map(([h, l]) => `<a href="${h}" class="px-3 py-3 rounded-lg ${h === here ? 'bg-navy-50 text-navy-800 font-semibold' : 'hover:bg-slate-50'}">${l}</a>`).join('')}</div>
+            <div class="px-7 pb-4 flex items-center gap-3"><span class="text-sm text-slate-500">Style</span><div data-style-switch></div></div>
         </nav>`;
     document.body.prepend(header);
     document.body.prepend(notice);
@@ -76,6 +78,7 @@
             <div><p class="font-semibold text-white">Contact</p><ul class="mt-3 space-y-2">
                 <li><a class="hover:text-white" href="${telHref}"><svg class="w-4 h-4 inline -mt-0.5 mr-1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>${esc(C.phoneDisplay)}</a></li><li><a class="hover:text-white" href="mailto:${esc(C.email)}"><svg class="w-4 h-4 inline -mt-0.5 mr-1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>${esc(C.email)}</a></li><li><svg class="w-4 h-4 inline -mt-0.5 mr-1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>${esc(C.address)}</li></ul></div>
         </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 flex items-center gap-3 text-sm"><span>Style</span><div data-style-switch class="on-dark"></div></div>
         <div class="border-t border-white/10"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 text-xs flex flex-col sm:flex-row justify-between gap-2">
             <p>© ${new Date().getFullYear()} ${esc(C.name)}. Your personal and health information is handled in line with POPIA.</p>
             <p>Online consultations do not replace emergency care.</p></div></div>`;

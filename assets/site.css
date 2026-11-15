@@ -1,6 +1,8 @@
 /* Salimboji shared styles (used with Tailwind CDN) */
 html { scroll-behavior: smooth; }
-:root { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
+:root { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --font: 'Geist'; }
+html[data-style="showcase"] { --font: 'Inter Tight'; }
+html[data-style="midnight"] { color-scheme: dark; }
 html { -webkit-tap-highlight-color: transparent; }
 body { font-family: 'Geist', system-ui, sans-serif; color: #1e293b; background: #f7f8fa; -webkit-font-smoothing: antialiased; }
 h1, h2, h3 { letter-spacing: -0.035em; text-wrap: balance; }
@@ -27,3 +29,64 @@ h1, h2, h3 { letter-spacing: -0.035em; text-wrap: balance; }
 details > summary { list-style: none; }
 details > summary::-webkit-details-marker { display: none; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* ---------- Showcase: a white page ---------- */
+html[data-style="showcase"] body { background: #ffffff; }
+html[data-style="showcase"] .page-head { background: #ffffff; }
+
+/* ---------- Midnight: dark navy. The emergency notice stays clearly red ---------- */
+html[data-style="midnight"] body { background: radial-gradient(900px 520px at 75% -10%, #1b2d5c 0%, transparent 62%) no-repeat, #080d1a; color: #c9d2e3; }
+html[data-style="midnight"] .bg-white, html[data-style="midnight"] .card, html[data-style="midnight"] .option, html[data-style="midnight"] .slot, html[data-style="midnight"] .field, html[data-style="midnight"] .btn-light { background-color: #0d1528; }
+html[data-style="midnight"] [class*="bg-white/"] { background-color: rgb(8 13 26 / .92); }
+html[data-style="midnight"] .card, html[data-style="midnight"] .option, html[data-style="midnight"] .slot { border-color: #1f2b45; }
+html[data-style="midnight"] .bg-slate-50, html[data-style="midnight"] .bg-slate-100 { background-color: #0f1930; }
+html[data-style="midnight"] .bg-slate-200 { background-color: #1a2540; }
+html[data-style="midnight"] .bg-navy-50 { background-color: #142142; }
+html[data-style="midnight"] .text-navy-900 { color: #e8edf7; }
+html[data-style="midnight"] .text-navy-800 { color: #c7d3ee; }
+html[data-style="midnight"] .text-navy-700, html[data-style="midnight"] .text-navy-500 { color: #9cb0d6; }
+html[data-style="midnight"] .text-slate-700 { color: #c9d2e3; }
+html[data-style="midnight"] .text-slate-600 { color: #a3aec4; }
+html[data-style="midnight"] .text-slate-500 { color: #8b97b0; }
+html[data-style="midnight"] .text-slate-400, html[data-style="midnight"] .text-slate-300 { color: #7f8ba5; }
+html[data-style="midnight"] .text-accent-500 { color: #9cc0ff; }
+html[data-style="midnight"] .border-slate-200, html[data-style="midnight"] .border-navy-200 { border-color: #1f2b45; }
+html[data-style="midnight"] .divide-slate-100 > * + * { border-color: #1f2b45; }
+html[data-style="midnight"] .bg-rose-50, html[data-style="midnight"] [class*="bg-rose-50/"] { background-color: #2a1416; }
+html[data-style="midnight"] .border-rose-200 { border-color: #5b2228; }
+html[data-style="midnight"] .text-rose-900, html[data-style="midnight"] .text-rose-800, html[data-style="midnight"] .text-rose-700 { color: #fecaca; }
+html[data-style="midnight"] .bg-emerald-50 { background-color: #0f2a22; }
+html[data-style="midnight"] .text-emerald-800, html[data-style="midnight"] .text-emerald-600 { color: #6ee7b7; }
+html[data-style="midnight"] .hover\:bg-slate-50:hover, html[data-style="midnight"] .hover\:bg-navy-50:hover, html[data-style="midnight"] .hover\:bg-slate-100:hover { background-color: #142142; }
+html[data-style="midnight"] .hover\:text-navy-800:hover { color: #ffffff; }
+html[data-style="midnight"] .btn-primary { background: #ffffff; color: #080d1a; }
+html[data-style="midnight"] .btn-light { color: #e8edf7; border-color: #26334f; }
+html[data-style="midnight"] .bg-navy-800 { background-color: #22386e; }
+html[data-style="midnight"] .rounded-3xl.bg-navy-800 { background: radial-gradient(600px 260px at 0% 0%, #2a4686, transparent 70%), #16244a; }
+html[data-style="midnight"] .field { border-color: #26334f; color: #e8edf7; }
+html[data-style="midnight"] .field:focus { border-color: #9cc0ff; box-shadow: 0 0 0 3px rgba(156,192,255,.2); }
+html[data-style="midnight"] .label { color: #a3aec4; }
+html[data-style="midnight"] .option[aria-pressed="true"] { background: #16244a; border-color: #9cc0ff; box-shadow: 0 0 0 1px #9cc0ff inset; }
+html[data-style="midnight"] .slot[aria-pressed="true"] { background: #ffffff; color: #080d1a; border-color: #ffffff; }
+html[data-style="midnight"] .slot:disabled { background: #0a1120; color: #3a4660; }
+html[data-style="midnight"] .page-head { background: transparent; border-bottom-color: #1f2b45; }
+@media (hover: hover) and (pointer: fine) {
+    html[data-style="midnight"] .btn-primary:hover { background: #dfe7f7; }
+    html[data-style="midnight"] .btn-light:hover, html[data-style="midnight"] .option:hover, html[data-style="midnight"] .slot:hover:not(:disabled) { border-color: #9cc0ff; }
+}
+
+/* ---------- Style switcher ---------- */
+.style-switch { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid #e3e6ec; border-radius: 999px; background: #ffffff; }
+.style-switch button { font: inherit; font-size: .78rem; font-weight: 500; line-height: 1; padding: 6px 10px; border: 0; border-radius: 999px; background: transparent; color: #55607a; cursor: pointer; touch-action: manipulation; transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), color .15s; }
+.style-switch button[aria-pressed="true"] { background: #142039; color: #ffffff; }
+.style-switch button:active { transform: scale(0.96); }
+@media (hover: hover) and (pointer: fine) { .style-switch button:not([aria-pressed="true"]):hover { color: #142039; } }
+@media (max-width: 1023px) { .style-switch button { padding: 10px 14px; font-size: .85rem; } }
+@media (prefers-reduced-motion: reduce) { .style-switch button { transition: none; } .style-switch button:active { transform: none; } }
+
+html[data-style="midnight"] .style-switch { border-color: #26334f; background: #0d1528; }
+html[data-style="midnight"] .style-switch button { color: #a3aec4; }
+html[data-style="midnight"] .style-switch button[aria-pressed="true"] { background: #e8edf7; color: #080d1a; }
+.style-switch.on-dark { border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.06); }
+.style-switch.on-dark button { color: #cbd5e1; }
+.style-switch.on-dark button[aria-pressed="true"] { background: #ffffff; color: #111f42; }
