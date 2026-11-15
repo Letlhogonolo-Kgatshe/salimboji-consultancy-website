@@ -21,7 +21,7 @@
 
     const notice = document.createElement('div');
     notice.className = 'bg-rose-50 text-rose-800 text-xs sm:text-sm';
-    notice.innerHTML = `<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-2"><span aria-hidden="true">🚑</span><span>${esc(C.emergency)}</span></div>`;
+    notice.innerHTML = `<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-2"><svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>${esc(C.emergency)}</span></div>`;
 
     const header = document.createElement('header');
     header.className = 'sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200';
@@ -36,7 +36,7 @@
                 ${PAGES.map(([h, l]) => `<a href="${h}" class="px-3 py-2 rounded-lg ${h === here ? 'text-navy-800 bg-navy-50 font-semibold' : 'text-slate-600 hover:text-navy-800 hover:bg-slate-50'}"${h === here ? ' aria-current="page"' : ''}>${l}</a>`).join('')}
             </nav>
             <div class="hidden lg:flex items-center gap-2">
-                <a href="${telHref}" class="px-3 py-2 rounded-lg text-sm font-semibold text-navy-800 hover:bg-navy-50">📞 ${hasPhone ? esc(C.phoneDisplay) : 'Call us'}</a>
+                <a href="${telHref}" class="px-3 py-2 rounded-lg text-sm font-semibold text-navy-800 hover:bg-navy-50 inline-flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> ${hasPhone ? esc(C.phoneDisplay) : 'Call us'}</a>
                 <a href="book.html" class="btn-primary !py-2.5 text-sm">Book now</a>
             </div>
             <button id="menu-btn" class="lg:hidden w-11 h-11 grid place-items-center rounded-xl text-navy-900 hover:bg-slate-100" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -58,9 +58,9 @@
     bar.className = 'lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-slate-200 grid grid-cols-3 text-xs font-semibold text-navy-800';
     bar.setAttribute('aria-label', 'Quick actions');
     bar.innerHTML = `
-        <a href="${telHref}" class="py-2.5 flex flex-col items-center gap-0.5 hover:bg-slate-50"><span class="text-lg" aria-hidden="true">📞</span>Call</a>
-        <a href="${waHref('Hi Salimboji, I would like to make an enquiry.')}" target="_blank" rel="noopener" class="py-2.5 flex flex-col items-center gap-0.5 hover:bg-slate-50"><span class="text-lg" aria-hidden="true">💬</span>${hasWa ? 'WhatsApp' : 'Message'}</a>
-        <a href="book.html" class="py-2.5 flex flex-col items-center gap-0.5 bg-navy-800 text-white"><span class="text-lg" aria-hidden="true">📅</span>Book now</a>`;
+        <a href="${telHref}" class="py-2.5 flex flex-col items-center gap-0.5 hover:bg-slate-50"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call</a>
+        <a href="${waHref('Hi Salimboji, I would like to make an enquiry.')}" target="_blank" rel="noopener" class="py-2.5 flex flex-col items-center gap-0.5 hover:bg-slate-50"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>${hasWa ? 'WhatsApp' : 'Message'}</a>
+        <a href="book.html" class="py-2.5 flex flex-col items-center gap-0.5 bg-navy-800 text-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>Book now</a>`;
     document.body.appendChild(bar);
     document.body.classList.add('pb-16', 'lg:pb-0');
 
@@ -74,7 +74,7 @@
                 <li><a class="hover:text-white" href="medication.html">Order medication</a></li><li><a class="hover:text-white" href="contact.html#faq">FAQ</a></li></ul></div>
             <div><p class="font-semibold text-white">Opening hours</p><ul class="mt-3 space-y-1.5">${C.hours.map(([d, h]) => `<li class="flex justify-between gap-4"><span>${esc(d)}</span><span class="text-white">${esc(h)}</span></li>`).join('')}</ul></div>
             <div><p class="font-semibold text-white">Contact</p><ul class="mt-3 space-y-2">
-                <li><a class="hover:text-white" href="${telHref}">📞 ${esc(C.phoneDisplay)}</a></li><li><a class="hover:text-white" href="mailto:${esc(C.email)}">✉️ ${esc(C.email)}</a></li><li>📍 ${esc(C.address)}</li></ul></div>
+                <li><a class="hover:text-white" href="${telHref}"><svg class="w-4 h-4 inline -mt-0.5 mr-1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>${esc(C.phoneDisplay)}</a></li><li><a class="hover:text-white" href="mailto:${esc(C.email)}"><svg class="w-4 h-4 inline -mt-0.5 mr-1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>${esc(C.email)}</a></li><li><svg class="w-4 h-4 inline -mt-0.5 mr-1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>${esc(C.address)}</li></ul></div>
         </div>
         <div class="border-t border-white/10"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 text-xs flex flex-col sm:flex-row justify-between gap-2">
             <p>© ${new Date().getFullYear()} ${esc(C.name)}. Your personal and health information is handled in line with POPIA.</p>
