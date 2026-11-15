@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────────────
 // Salimboji Consultancy: practice details used across every page.
-// ⚠️ Replace the placeholder values below with the practice's real details.
+// Replace the placeholder values below with the practice's real details.
 //    The original site used US template details (+1 555…, New York),
 //    so these are left clearly marked until confirmed.
 // ─────────────────────────────────────────────────────────────────────

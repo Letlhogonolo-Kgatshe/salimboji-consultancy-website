@@ -36,8 +36,8 @@
                         <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" id="services"></div>
                         <p class="mt-6 font-semibold text-navy-900">How would you like to meet?</p>
                         <div class="mt-3 grid grid-cols-2 gap-3" id="channels">
-                            <button type="button" class="option" data-channel="WhatsApp video call" aria-pressed="true"><span class="text-xl" aria-hidden="true">💬</span><span class="block font-semibold mt-1">WhatsApp video</span><span class="block text-xs text-slate-500">Easiest on a phone</span></button>
-                            <button type="button" class="option" data-channel="Zoom meeting" aria-pressed="false"><span class="text-xl" aria-hidden="true">🎥</span><span class="block font-semibold mt-1">Zoom</span><span class="block text-xs text-slate-500">Best on a computer</span></button>
+                            <button type="button" class="option" data-channel="WhatsApp video call" aria-pressed="true"><span class="text-navy-700" aria-hidden="true"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><span class="block font-semibold mt-1">WhatsApp video</span><span class="block text-xs text-slate-500">Easiest on a phone</span></button>
+                            <button type="button" class="option" data-channel="Zoom meeting" aria-pressed="false"><span class="text-navy-700" aria-hidden="true"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg></span><span class="block font-semibold mt-1">Zoom</span><span class="block text-xs text-slate-500">Best on a computer</span></button>
                         </div>
                     </fieldset>
 
@@ -74,11 +74,11 @@
 
                     <!-- Done -->
                     <div data-panel="5" class="hidden text-center py-4">
-                        <p class="text-5xl" aria-hidden="true">✅</p>
+                        <p class="flex justify-center text-emerald-600" aria-hidden="true"><svg class="w-14 h-14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></p>
                         <h2 class="mt-3 text-2xl font-semibold text-navy-900">Request ready to send</h2>
                         <p class="mt-2 text-slate-600 max-w-md mx-auto">Your message has opened in <span id="done-via"></span>. Press send there, and we'll reply to confirm your appointment.</p>
                         <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-                            <button type="button" id="ics" class="btn-light">📅 Add to calendar</button>
+                            <button type="button" id="ics" class="btn-light"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>Add to calendar</button>
                             <a href="index.html" class="btn-primary">Back to home</a>
                         </div>
                     </div>
@@ -103,16 +103,16 @@
         const { $, $$, esc, hasWa, saNow } = window.SC;
         const C = window.CLINIC;
         const SERVICES = [
-            ['consult', '🩺', 'General consultation', 'New symptoms or a health concern'],
-            ['followup', '🔁', 'Follow-up', 'Check-in after a previous visit'],
-            ['chronic', '💙', 'Chronic condition review', 'e.g. blood pressure, diabetes, asthma'],
-            ['monitoring', '📈', 'Health monitoring', 'Ongoing care plan check-in'],
-            ['script', '💊', 'Repeat prescription review', 'Where clinically appropriate'],
-            ['prevent', '🛡️', 'Preventive care & advice', 'Lifestyle, travel and wellness advice'],
+            ['consult', '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v6a5 5 0 0 0 10 0V3"/><path d="M10 14v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="12" r="2"/></svg>', 'General consultation', 'New symptoms or a health concern'],
+            ['followup', '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg>', 'Follow-up', 'Check-in after a previous visit'],
+            ['chronic', '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>', 'Chronic condition review', 'e.g. blood pressure, diabetes, asthma'],
+            ['monitoring', '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>', 'Health monitoring', 'Ongoing care plan check-in'],
+            ['script', '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 20.5l10-10a5 5 0 1 0-7-7l-10 10a5 5 0 1 0 7 7z"/><path d="M8.5 8.5l7 7"/></svg>', 'Repeat prescription review', 'Where clinically appropriate'],
+            ['prevent', '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>', 'Preventive care & advice', 'Lifestyle, travel and wellness advice'],
         ];
         const st = { step: 1, service: new URLSearchParams(location.search).get('service') || 'consult', channel: 'WhatsApp video call', day: null, time: null };
 
-        $('#services').innerHTML = SERVICES.map(([id, ic, t, d]) => `<button type="button" class="option" data-service="${id}" aria-pressed="${id === st.service}"><span class="text-xl" aria-hidden="true">${ic}</span><span class="block font-semibold mt-1 text-navy-900">${t}</span><span class="block text-xs text-slate-500">${d}</span></button>`).join('');
+        $('#services').innerHTML = SERVICES.map(([id, ic, t, d]) => `<button type="button" class="option" data-service="${id}" aria-pressed="${id === st.service}"><span class="text-navy-700" aria-hidden="true">${ic}</span><span class="block font-semibold mt-1 text-navy-900">${t}</span><span class="block text-xs text-slate-500">${d}</span></button>`).join('');
         $('#services').addEventListener('click', (e) => { const b = e.target.closest('[data-service]'); if (!b) return; st.service = b.dataset.service; $$('[data-service]').forEach((x) => x.setAttribute('aria-pressed', x === b)); });
         $('#channels').addEventListener('click', (e) => { const b = e.target.closest('[data-channel]'); if (!b) return; st.channel = b.dataset.channel; $$('[data-channel]').forEach((x) => x.setAttribute('aria-pressed', x === b)); });
 
@@ -174,8 +174,8 @@
                 if ($('#b-reason').value.trim()) rows.push(['Reason', $('#b-reason').value.trim()]);
                 $('#summary').innerHTML = rows.map(([k, v]) => `<div class="py-2.5 flex justify-between gap-4"><dt class="text-slate-500">${k}</dt><dd class="font-semibold text-navy-900 text-right">${esc(v)}</dd></div>`).join('');
                 const text = message();
-                $('#send').innerHTML = (hasWa ? `<a class="btn-primary" data-via="WhatsApp" target="_blank" rel="noopener" href="https://wa.me/${C.whatsapp}?text=${encodeURIComponent(text)}">💬 Send on WhatsApp</a>` : '')
-                    + `<a class="${hasWa ? 'btn-light' : 'btn-primary'}" data-via="your email app" href="mailto:${C.email}?subject=${encodeURIComponent('Consultation booking request')}&body=${encodeURIComponent(text)}">✉️ Send by email</a>`;
+                $('#send').innerHTML = (hasWa ? `<a class="btn-primary" data-via="WhatsApp" target="_blank" rel="noopener" href="https://wa.me/${C.whatsapp}?text=${encodeURIComponent(text)}"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Send on WhatsApp</a>` : '')
+                    + `<a class="${hasWa ? 'btn-light' : 'btn-primary'}" data-via="your email app" href="mailto:${C.email}?subject=${encodeURIComponent('Consultation booking request')}&body=${encodeURIComponent(text)}"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Send by email</a>`;
             }
             error('');
             window.scrollTo({ top: 0, behavior: 'smooth' });
